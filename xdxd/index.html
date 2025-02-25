@@ -3,51 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEB DICTIONARY</title>
+    <title>Diccionario Web</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="background-letters" id="background-letters"></div>
     <header class="cabecera">
         <nav class="nav-container">
             <div class="logo-container">
-                <h1 class="logo">WEB DICTIONARY</h1>
+                <h1 class="logo">DICCIONARIO WEB</h1>
                 <i class="fas fa-book diccionario-icon"></i>
             </div>
             <div class="menu-icon" id="menu-icon">
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="lista-cabecera" id="lista-cabecera">
-                <li id="toggle-historial-btn">History</li>
-                <li id="toggle-traducir-btn">Translate</li>
-                <li>Assistant</li>
-                <li>AI<span class="pro-notification">PrO</span></li>
+                <li id="toggle-historial-btn">Historial</li>
+                <li id="toggle-traducir-btn">Traducir</li>
+                <li id="asistente-btn">Asistente</li>
+               
             </ul>
         </nav>
         <div class="side-panel" id="side-panel">
             <div class="side-panel-content">
-                <li id="toggle-historial-btn-mobile">History</li>
-                <li id="toggle-traducir-btn-mobile">Translate</li>
+                <li id="toggle-historial-btn-mobile">Historial</li>
+                <li id="toggle-traducir-btn-mobile">Traducir</li>
+                <li id="asistente-btn-mobile">Asistente</li>
+                <li>IA <span class="pro-notification">PrO</span></li>
             </div>
         </div>
     </header>
     <div id="contenedor-historial" class="historial">
         <div class="historial-header">
-            <h2>Search History</h2>
-            <button id="cerrar-historial-btn">Close</button>
+            <h2>Historial de Búsqueda</h2>
+            <button id="cerrar-historial-btn">Cerrar</button>
         </div>
         <ul id="lista-historial"></ul>
     </div>
     <section class="search-container" id="search-container">
-        <input class="Buscador" type="text" placeholder="Escribe la palabra aqui" id="entrada-palabra">
-        <button class="search-btn" id="buscar-btn">Search</button>
+        <input class="Buscador" type="text" placeholder="Buscar palabra" id="entrada-palabra">
+        <button class="search-btn" id="buscar-btn">Buscar</button>
         <button class="mic-btn" id="microfono-btn"><i class="fas fa-microphone"></i></button>
     </section>
-    <div id="mensaje-error" class="mensaje-error" style="display: none;">
-        <p id="mensaje-texto"></p>
-    </div>
     <main>
         <div class="resultado" id="resultado">
             <div class="seccion-izquierda">
@@ -55,17 +54,14 @@
                     <div class="palabra" style="display: none;">
                         <h3 id="nombre-palabra"></h3>
                     </div>
-                    <div class="definicion">
-                        <h3>Definition</h3>
-                        <p id="significado-palabra"></p>
+                    <div class="sinonimos" style="display: none;"><strong>Sinónimos:</strong> <span id="texto-sinonimos"></span></div>
+                    <div class="definicion" style="display: none;">
+                        <h3>Definición</h3>
+                        <p class="significado-palabra" id="significado-palabra"></p>
                     </div>
-                    <div class="sinonimos">
-                        <h3>Synonyms</h3>
-                        <p id="sinonimos-palabra"></p>
-                    </div>
-                    <div class="ejemplo">
-                        <h3>Example</h3>
-                        <p id="ejemplo-palabra"></p>
+                    <div class="ejemplo" style="display: none;">
+                        <h3>Ejemplo</h3>
+                        <p class="ejemplo-palabra" id="ejemplo-palabra"></p>
                     </div>
                 </div>
             </div>
@@ -74,14 +70,16 @@
             </div>
         </div>
         <div class="ver-mas">
-            <button id="ver-mas-btn" style="display: none;">See More</button>
+            <button id="ver-mas-btn" style="display: none;">Explore more</button>
         </div>
     </main>
     <div id="galeria" style="display: none;">
-        <div class="galeria-imagenes" id="galeria-imagenes"></div>
+        <div class="galeria-imagenes" id="galeria-imagenes">
+            <!-- La galería de imágenes se llenará aquí -->
+        </div>
     </div>
     <footer class="footer" id="footer">
-        &copy; 2025 Diccionario Web. Todos los derechos reservados.
+        Creatiby for JMR
     </footer>
     <script src="./script.js"></script>
 </body>
