@@ -475,3 +475,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setInterval(createLetter, 300);
 });
+
+
+
+
+function iniciarDictado() {
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+        const reconocimiento = new webkitSpeechRecognition();
+        reconocimiento.continuous = false;
+        reconocimiento.interimResults = false;
+        reconocimiento.lang = "es-ES";
+        reconocimiento.start();
+
+        botonMicrofono.classList.add("active");
+
+        reconocimiento.onresult = function(event) {
+            document.getElementById('entrada-palabra').value = event.results[0][0].transcript;
+            reconocimiento.stop();
+            buscarPalabra();
+        };
+
+        reconocimiento.onerror = function(event) {
+            reconocimiento.stop();
+            botonMicrofono.classList.remove("active");
+        };
+    }
+}
+
+function activarAsistente() {
+    if (asistenteActivo) {
+        recognition.stop();
+        asistenteActivo = false;
+        presentacionActiva = false;
+        botonAsistente.classList.remove("active");
+        botonAsistente.style.backgroundColor = "";
+        leerEnVozAlta("Asistente de voz desactivado.");
+    } else {
+        if (window.hasOwnProperty("webkitSpeechRecognition")) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = "es-ES";
+            recognition.start();
+
+            recognition.onresult = function (event) {
+                if (presentacionActiva) return;
+                window.speechSynthesis.cancel();
+                const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                if (transcript === "desactivar" || transcript === "desactívate") {
+                    recognition.stop();
+                    asistenteActivo = false;
+                    botonAsistente.classList.remove("active");
+                    botonAsistente.style.backgroundColor = "";
+                    leerEnVozAlta("Asistente de voz desactivado.");
+                } else if (transcript.startsWith("buscar")) {
+                    const palabra = transcript.replace("buscar", "").trim();
+                    document.getElementById("entrada-palabra").value = palabra;
+                    buscarPalabra();
+                } else if (transcript === "leeme" || transcript === "léeme") {
+                    leerEnVozAlta(document.getElementById("significado-palabra").textContent);
+                } else if (transcript === "abrir historial") {
+                    contenedorHistorial.classList.add("mostrar");
+                    cargarHistorial();
+                } else if (transcript === "cerrar historial") {
+                    contenedorHistorial.classList.remove("mostrar");
+                } else if (transcript.startsWith("eliminar la búsqueda número")) {
+                    const numero = parseInt(transcript.replace("eliminar la búsqueda número", "").trim());
+                    eliminarItemHistorial(numero - 1);
+                } else if (transcript === "eliminar la primera búsqueda") {
+                    eliminarItemHistorial(0);
+                } else if (transcript === "ver más") {
+                    if (galeria.style.display !== "block") {
+                        toggleGaleria();
+                    }
+                } else if (transcript === "ver menos") {
+                    if (galeria.style.display === "block") {
+                        toggleGaleria();
+                    }
+                } else if (transcript === "traducir página") {
+                    traducirPagina();
+                }
+            };
+
+            recognition.onerror = function (event) {
+                recognition.stop();
+                asistenteActivo = false;
+                presentacionActiva = false;
+                botonAsistente.classList.remove("active");
+                botonAsistente.style.backgroundColor = "";
+                leerEnVozAlta("Error en el reconocimiento de voz.");
+            };
+
+            asistenteActivo = true;
+            presentacionActiva = true;
+            botonAsistente.classList.add("active");
+            botonAsistente.style.backgroundColor = "red";
+            leerPresentacionCompleta();
+        } else {
+            leerEnVozAlta("El reconocimiento de voz no es compatible con este navegador.");
+        }
+    }
+}

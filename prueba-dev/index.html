@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB DICTIONARY</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<body>
+    <div class="background-letters" id="background-letters"></div>
+    <header class="cabecera">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <h1 class="logo">WEB DICTIONARY</h1>
+                <i class="fas fa-book diccionario-icon"></i>
+            </div>
+            <div class="menu-icon" id="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="lista-cabecera" id="lista-cabecera">
+                <li id="toggle-historial-btn">History</li>
+                <li id="toggle-traducir-btn">Translate</li>
+                <li id="asistente-btn">Assistant</li>
+            </ul>
+        </nav>
+        <div class="side-panel" id="side-panel">
+            <div class="side-panel-content">
+                <li id="toggle-historial-btn-mobile">History</li>
+                <li id="toggle-traducir-btn-mobile">Translate</li>
+                <li id="asistente-btn-mobile">Assistant</li>
+                <li>AI <span class="pro-notification">Pro</span></li>
+            </div>
+        </div>
+    </header>
+    <div id="contenedor-historial" class="historial">
+        <div class="historial-header">
+            <h2>Search History</h2>
+            <button id="cerrar-historial-btn">Close</button>
+        </div>
+        <ul id="lista-historial"></ul>
+    </div>
+    <section class="search-container" id="search-container">
+        <input class="Buscador" type="text" placeholder="Type the word here..." id="entrada-palabra" autocomplete="off" autocorrect="off">
+        <button class="search-btn" id="buscar-btn">Search</button>
+        <button class="mic-btn" id="microfono-btn"><i class="fas fa-microphone"></i></button>
+    </section>
+    <main>
+        <div class="resultado" id="resultado">
+            <div class="seccion-izquierda">
+                <div class="bloque-resultados">
+                    <div class="palabra" style="display: none;">
+                        <h3 id="nombre-palabra"></h3>
+                    </div>
+                    <div class="sinonimos" style="display: none;"><strong>Synonyms:</strong> <span id="texto-sinonimos"></span></div>
+                    <div class="definicion" style="display: none;">
+                        <h3>Definition</h3>
+                        <p class="significado-palabra" id="significado-palabra"></p>
+                    </div>
+                    <div class="ejemplo" style="display: none;">
+                        <h3>Example</h3>
+                        <p class="ejemplo-palabra" id="ejemplo-palabra"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="seccion-derecha" id="seccion-derecha">
+                <!-- Images will be added here -->
+            </div>
+        </div>
+        <div class="ver-mas">
+            <button id="ver-mas-btn" style="display: none;">See More</button>
+        </div>
+    </main>
+    <div id="galeria" style="display: none;">
+        <div class="galeria-imagenes" id="galeria-imagenes">
+            <!-- Gallery images will be added here -->
+        </div>
+    </div>
+    <footer class="footer" id="footer">
+        Created by JMR
+    </footer>
+    <script src="./script.js"></script>
+</body>
+</html>

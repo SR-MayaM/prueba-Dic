@@ -22,15 +22,14 @@
             <ul class="lista-cabecera" id="lista-cabecera">
                 <li id="toggle-historial-btn">Historial</li>
                 <li id="toggle-traducir-btn">Traducir</li>
-                <li id="asistente-btn">Asistente</li>
-               
+                <li id="asistente-btn" class="asistente-btn">Asistente</li>
             </ul>
         </nav>
         <div class="side-panel" id="side-panel">
             <div class="side-panel-content">
                 <li id="toggle-historial-btn-mobile">Historial</li>
                 <li id="toggle-traducir-btn-mobile">Traducir</li>
-                <li id="asistente-btn-mobile">Asistente</li>
+                <li id="asistente-btn-mobile" class="asistente-btn">Asistente</li>
                 <li>IA <span class="pro-notification">PrO</span></li>
             </div>
         </div>
@@ -47,6 +46,9 @@
         <button class="search-btn" id="buscar-btn">Buscar</button>
         <button class="mic-btn" id="microfono-btn"><i class="fas fa-microphone"></i></button>
     </section>
+    <div id="mensaje-error" class="mensaje-error" style="display: none;">
+        <p id="mensaje-texto"></p>
+    </div>
     <main>
         <div class="resultado" id="resultado">
             <div class="seccion-izquierda">
