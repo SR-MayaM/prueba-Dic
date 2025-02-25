@@ -1,0 +1,500 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    height: 100vh; /* Hace que el cuerpo ocupe toda la altura de la ventana */
+    overflow: hidden; /* Elimina el scroll por defecto */
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.ver-mas-activo {
+    overflow-y: auto; /* Permitir scroll vertical cuando la galería esté activa */
+    overflow-x: hidden; /* Eliminar scroll horizontal */
+    height: auto; /* Permitir que el body crezca */
+}
+
+.cabecera {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 0 10px; /* Añade un padding para despegar del borde */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Fija un ancho máximo para centrar el contenido */
+    padding: 0 10px; /* Despega los elementos del borde */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    text-align: start;
+    margin-right: 10px;
+}
+
+.diccionario-icon {
+    font-size: 24px;
+}
+
+.lista-cabecera {
+    list-style: none;
+    display: flex;
+    gap: 50px; /* Incrementa el espacio entre las palabras en el header */
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Nueva tipografía */
+    font-weight: bold; /* Negritas */
+    font-size: 18px; /* Tamaño de fuente */
+}
+
+.lista-cabecera li {
+    cursor: pointer; /* Cursor pointer para los elementos de la lista */
+    transition: color 0.3s, transform 0.3s; /* Transición para el cambio de color y tamaño */
+    position: relative;
+}
+
+.lista-cabecera li::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.lista-cabecera li:hover {
+    color: #ddd; /* Color al pasar el cursor por encima */
+    transform: scale(1.1); /* Aumentar tamaño al pasar el cursor */
+}
+
+.lista-cabecera li:hover::after {
+    width: 100%; /* Mostrar línea debajo del elemento */
+}
+
+.pro-notification {
+    background-color: gold;
+    color: black;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Ocupa toda la altura del viewport */
+    transition: all 0.3s ease-in-out;
+}
+
+.search-container.move-to-top {
+    position: absolute;
+    top: 90px; /* Justo debajo del header */
+    left: 50%;
+    transform: translateX(-50%);
+    height: auto; /* Ajusta la altura de la barra de búsqueda */
+    animation: slideUp 0.5s ease-in-out; /* Animación de deslizamiento hacia arriba */
+}
+
+@keyframes slideUp {
+    from {
+        top: 100%;
+    }
+    to {
+        top: 90px;
+    }
+}
+
+.search-container input {
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    width: 300px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+::placeholder {
+    color: white;
+    opacity: 0.6;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.search-btn, .mic-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    height: 55px; /* Ajustar la altura para que coincida con el input */
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.mic-btn.active {
+    background-color: red; /* Cambia el fondo a rojo cuando esté activo */
+}
+
+.search-btn {
+    font-weight: bold; /* Negritas para el botón "Buscar" */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el botón "Buscar" */
+}
+
+.search-btn:hover, .mic-btn:hover {
+    background-color: #333;
+}
+
+.resultado {
+    display: none; /* Ocultar el bloque de resultados por defecto */
+    justify-content: space-between;
+    margin-top: 90px; /* Baja más los resultados y las imágenes */
+    width: 100%;
+    overflow: hidden; /* Elimina el scroll en el bloque de resultados */
+}
+
+.resultado.mostrar {
+    display: flex; /* Mostrar el bloque de resultados cuando se busque una palabra */
+}
+
+.bloque-resultados {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seccion-izquierda {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.seccion-derecha {
+    width: 35%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-right: 20px;
+    overflow-y: auto; /* Agregar scroll vertical si el contenido no cabe */
+    max-height: 80vh; /* Limitar la altura máxima */
+}
+
+.seccion-derecha img {
+    width: calc(50% - 10px); /* Ajusta el ancho de las imágenes para que se alineen en una cuadrícula */
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover; /* Asegura que las imágenes se ajusten al tamaño sin deformarse */
+}
+
+.definicion h3, .seccion-derecha h3 {
+    font-size: 24px;
+    color: black;
+    text-align: start;
+    margin-bottom: 5px; /* Espacio más pequeño entre el título y el contenido */
+}
+
+.ejemplo h3{
+    color: red;
+    font-size: 24px;
+    text-align: start;
+}
+
+.palabra {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+.sinonimos { /* Reducir el espacio superior */
+    color: #000;
+    margin-bottom: 20px; /* Reducir el espacio inferior */
+    text-align: start;
+    transform: translateY(-10px); /* Mover el contenido hacia arriba */;
+}
+
+.significado-palabra, .ejemplo-palabra {
+    color: #000;
+    transform: translateY(-10px); /* Mover el contenido hacia arriba */;
+    text-align: start;
+}
+
+.error {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.historial {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Ocultar completamente el historial */
+    width: 300px;
+    height: 100%;
+    background-color: #D2DAFF;
+    border-right: 1px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto; 
+}
+
+.historial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.historial.mostrar {
+    left: 0;
+}
+
+.historial h2 {
+    font-size: 24px;
+    color: black;
+}
+
+.historial ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: white;
+}
+
+.historial ul li {
+    background: black;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.historial ul li button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 1em;
+}
+
+.background-letters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.letter {
+    position: absolute;
+    font-size: 3rem;
+    color: rgba(0, 0, 0, 0.1);
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+.ver-mas {
+    display: flex;
+    justify-content: end;
+    margin-right: 28px;
+}
+
+.galeria-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+.galeria-imagenes img {
+    width: calc(25% - 20px); /* Ajusta el ancho de las imágenes para que se alineen en una cuadrícula */
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover; /* Asegura que las imágenes se ajusten al tamaño sin deformarse */
+}
+
+.footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    display: none; /* Ocultar el footer por defecto */
+}
+
+.footer.mostrar {
+    display: block; /* Mostrar el footer cuando se haga clic en "Ver más" */
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        width: 90vmin;
+        padding: 60px 30px;
+    }
+
+    .caja-busqueda input {
+        width: 60%;
+    }
+
+    .caja-busqueda button {
+        width: 20%;
+    }
+
+    #microfono-btn {
+        width: 15%;
+    }
+
+    .resultado {
+        flex-direction: column;
+    }
+
+    .seccion-izquierda, .seccion-derecha {
+        width: 100%;
+    }
+
+    .seccion-derecha img {
+        margin-top: 20px;
+    }
+
+    .galeria-imagenes img {
+        width: calc(50% - 20px);
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+    }
+
+    .lista-cabecera {
+        display: none;
+    }
+
+    .side-panel {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100%;
+        background-color: black;
+        color: white;
+        transition: right 0.3s ease;
+        z-index: 1001;
+    }
+
+    .side-panel-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .side-panel-content li {
+        list-style: none;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .side-panel.show {
+        right: 0;
+    }
+
+    .footer {
+        padding: 5px 0; /* Quitar espacios en blancos en móviles */
+    }
+}
+
+@media (min-width: 769px) {
+    .menu-icon {
+        display: none;
+    }
+
+    .lista-cabecera {
+        display: flex;
+        margin-left: auto; /* Mueve la lista de la cabecera a la izquierda */
+    }
+
+    .side-panel {
+        display: none; /* Oculta el panel lateral en dispositivos mayores a 768px */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .contenedor {
+        width: 120vmin;
+        padding: 50px 40px;
+    }
+
+    .caja-busqueda input {
+        width: 60%;
+    }
+
+    .caja-busqueda button {
+        width: 20%;
+    }
+
+    #microfono-btn {
+        width: 15%;
+    }
+
+    .galeria-imagenes img {
+        width: calc(33.333% - 20px);
+    }
+}
